@@ -33,13 +33,13 @@ def evolve_exp(fileName):
         autoit.mouse_click('left', BACKPACK_LOCATION[0], BACKPACK_LOCATION[1])
         time.sleep(0.25)
 
-    ret = pyautogui.locateOnScreen(fileName, region=INVENTORY_REGION, grayscale=True, confidence=1)
+    ret = pyautogui.locateOnScreen(fileName, region=INVENTORY_REGION, grayscale=True, confidence=0.9)
     if ret != None:
         pos = (ret.left + ret.width / 2, ret.top + ret.height / 2)
         autoit.mouse_click('left', int(pos[0]), int(pos[1]))
         time.sleep(0.1)
         autoit.mouse_click('left', EVOLVE_LOCATION[0], EVOLVE_LOCATION[1])
-        if pyautogui.pixel(CAN_EVOLVE_LOCATION[0], CAN_EVOLVE_LOCATION[1])[0] == 255:
+        if pyautogui.pixel(CAN_EVOLVE_LOCATION[0], CAN_EVOLVE_LOCATION[1])[0] != 255:
             autoit.mouse_click('left', UPGRADE_LOCATION[0], UPGRADE_LOCATION[1])
             time.sleep(0.25)
             autoit.mouse_click('left', UPGRADE_LOCATION[0], UPGRADE_LOCATION[1])
