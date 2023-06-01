@@ -15,6 +15,7 @@ INVENTORY_REGION = (709, 241, 1204-709, 791-241)
 EVOLVE_LOCATION = (905, 376)
 UPGRADE_LOCATION = (956, 640)
 CAN_EVOLVE_LOCATION = (545, 856)
+CANCEL_LOCATION = (960, 721)
 
 def click(x, y):
     # win32api.SetCursorPos((x, y))
@@ -39,11 +40,18 @@ def evolve_exp(fileName):
         autoit.mouse_click('left', int(pos[0]), int(pos[1]))
         time.sleep(0.1)
         autoit.mouse_click('left', EVOLVE_LOCATION[0], EVOLVE_LOCATION[1])
-        if pyautogui.pixel(CAN_EVOLVE_LOCATION[0], CAN_EVOLVE_LOCATION[1])[0] != 255:
+        time.sleep(0.25)
+        if pyautogui.pixel(CAN_EVOLVE_LOCATION[0], CAN_EVOLVE_LOCATION[1])[0] == 255:
+            autoit.mouse_click('left', CANCEL_LOCATION[0], CANCEL_LOCATION[1])
+            time.sleep(0.25)
+            autoit.mouse_click('left', BACKPACK_LOCATION[0], BACKPACK_LOCATION[1])
+            time.sleep(0.25)
+        else:
             autoit.mouse_click('left', UPGRADE_LOCATION[0], UPGRADE_LOCATION[1])
             time.sleep(0.25)
             autoit.mouse_click('left', UPGRADE_LOCATION[0], UPGRADE_LOCATION[1])
             return True
+
 
     return False
 
